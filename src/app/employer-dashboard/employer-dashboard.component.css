@@ -1,0 +1,253 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Navbar Styling */
+.navbar {
+    width: 100vw;
+    height: 10vh;
+    background-color: #fff;
+    box-shadow: 0vw 0.2vh 1vw rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+}
+
+/* Navbar Container */
+.navbar-container {
+    width: 95vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2vw;
+    position: fixed;
+}
+
+/* Logo Section */
+.navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+}
+
+.navbar-logo img {
+    width: 4vw;
+    height: 4vw;
+}
+
+.navbar-logo span {
+    font-size: 1.5vw;
+    font-weight: bold;
+    color: blue;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Navigation Links */
+.navbar-links {
+    display: flex;
+    gap: 2.5vw;
+    list-style: none;
+}
+
+.navbar-links li {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-links a {
+    display: flex;
+    align-items: center;
+    gap: 0.8vw;
+    text-decoration: none;
+    font-size: 1.1vw;
+    color: black;
+    padding: 1vh 1.5vw;
+    border-radius: 0.5vw;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Icons */
+.navbar-links i {
+    font-size: 1.3vw;
+}
+
+/* Hover Effect */
+.navbar-links a:hover {
+    background-color: #f2f2f2;
+    transform: scale(1.1);
+    box-shadow: 0vw 0.4vh 1vw rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+/* Profile Dropdown Container */
+.profile-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Profile Button */
+.profile-btn {
+    background-color: black;
+    color: white;
+    font-size: 1vw;
+    font-weight: bold;
+    padding: 1vh 2vw;
+    border-radius: 5vw;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.8vw;
+    transition: all 0.3s ease-in-out;
+}
+
+.profile-btn i {
+    font-size: 1.3vw;
+}
+
+/* Hover Effect */
+.profile-btn:hover {
+    background-color: white;
+    color: black;
+    border: 0.2vw solid black;
+    box-shadow: 0vw 0.4vh 1vw rgba(0, 0, 0, 0.3);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    position: absolute;
+    top: 110%;
+    right: 0;
+    background-color: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 0.5vw;
+    overflow: hidden;
+    width: 12vw;
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Dropdown Items */
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8vw;
+    font-size: 1vw;
+    padding: 1vh 1vw;
+    text-decoration: none;
+    color: black;
+    transition: background 0.3s ease-in-out;
+}
+
+/* Icons in Dropdown */
+.dropdown-item i {
+    font-size: 1.2vw;
+    color: black;
+}
+
+/* Hover Effect */
+.dropdown-item:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Logout Special Styling */
+.logout {
+    color: red;
+    font-weight: bold;
+}
+
+.logout i {
+    color: red;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+ /* Navbar Styling (Add styles for the dropdown and notification items) */
+ .notifications-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 0.5vw;
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 1000;
+    padding: 10px;
+  }
+  
+  .notification-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .notification-item p {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+  }
+
+  .notification-item i{
+    padding-left: 79px;
+  }
+
+  
+  .remove-btn {
+    color: black;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .clear-all-btn {
+    color: red;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .clear-all-btn:hover{
+    color: black;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+  }
+  

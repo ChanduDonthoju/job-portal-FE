@@ -1,0 +1,91 @@
+<nav class="nav-div">
+    <div id="nav-sub-div">
+      <div id="nav-seg1">
+        <div id="job-icon-div">
+          <img id="job-icon" src="../assets/job-icon.png" alt="Job Icon"><span>JobConnect</span>
+        </div>
+        <div id="fields">
+          <a href="#"><i class="bi bi-briefcase-fill"></i> Jobs</a>
+          <a href="#"><i class="bi bi-buildings"></i> Companies</a>
+          <a href="#"><i class="bi bi-tools"></i> Services</a>
+        </div>
+      </div>
+      <div id="nav-seg2">
+        <button class="btn login-btn" (click)="goToLoginPage()">Login</button>
+        <button class="btn reg-btn" (click)="goToRegisterPage()">Register</button>      
+      </div>
+    </div>
+  </nav>
+  
+  
+  <div id="segment1">
+      <h1 style="color: aliceblue;">Find your dream job now</h1>
+      <h6 style="color: aliceblue;">5 lakhs+ jobs to explore</h6>
+      <div id="search-div">
+        <i class="bi bi-search search-icon"></i>
+        <input type="search" placeholder="Search for jobs, companies...">
+        <button>Search</button>
+    </div>
+  </div>
+  <div id="top-companies">
+    <h1>Top Companies hiring now</h1>
+    <br />
+    <div id="carousel-container">
+      <button (click)="scrollLeft()" id="prevBtn">&#10094;</button>
+  
+      <div id="top-companies-div" #scrollContainer>
+        <div class="mnc" *ngFor="let c of companies">
+          <h3>{{ c.name }}</h3>
+          <p>{{ c.hiring }}k+ are actively hiring</p>
+          <div class="company-img-div">
+            <img *ngFor="let img of c.images" [src]="img" alt="Company Logo" />
+          </div>
+        </div>
+      </div>
+  
+      <button (click)="scrollRight()" id="nextBtn">&#10095;</button>
+    </div>
+  </div>
+  
+  
+  <div id="footer-div">
+    <footer>
+      <div id="footer-div1">
+        <div id="sub-footer-div1">
+          <img id="job-icon" src="../assets/job-icon.png" alt="Job Icon"><span>JobConnect</span>
+        </div>
+        <div id="sub-footer-div2">
+          <p>Connect with us</p><br>
+          <div id="social-icons">
+            <i class="bi bi-facebook"></i>
+            <i class="bi bi-instagram"></i>
+            <i class="bi bi-twitter-x"></i>
+            <i class="bi bi-linkedin"></i>
+          </div>          
+        </div>
+      </div>
+
+      <div id="footer-div2">
+        <a href="#">About us</a>
+        <a href="#">Careers</a>
+        <a href="#">Employer home</a>
+        <a href="#">Site map</a>
+        <a href="#">Credits</a>
+      </div>
+      <div id="footer-div3">
+        <a href="#">help center</a>
+        <a href="#">Summons notices</a>
+        <a href="#">Griveances</a>
+        <a href="#">Report issues</a>
+      </div>
+      <div id="footer-div4">
+        <a href="#">Privacy policy</a>
+        <a href="#">terms & conditions</a>
+        <a href="#">Fraud alert</a>
+        <a href="#">Trust & saftey</a>
+      </div>
+      <div id="footer-div5">
+        <img src="../assets/job-footer.png" alt="job-footer-img">
+      </div>
+    </footer>
+  </div>

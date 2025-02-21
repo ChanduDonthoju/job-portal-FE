@@ -1,0 +1,42 @@
+<p>jobpostadd works!</p>
+
+<div class="container mt-5">
+    <h2 class="form-heading">Job Post Form</h2>
+    <form [formGroup]="jobPostForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" class="form-control" formControlName="title" placeholder="Enter job title" />
+        <div *ngIf="jobPostForm.get('title').invalid && jobPostForm.get('title').touched" class="text-danger">
+          Title is required
+        </div>
+      </div>
+     
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" id="location" class="form-control" formControlName="location" placeholder="Enter location" />
+        <div *ngIf="jobPostForm.get('location').invalid && jobPostForm.get('location').touched" class="text-danger">
+          Location is required
+        </div>
+      </div>
+   
+      <div class="form-group">
+        <label for="salary">Salary</label>
+        <input type="number" id="salary" class="form-control" formControlName="salary" placeholder="Enter salary" />
+        <div *ngIf="jobPostForm.get('salary').invalid && jobPostForm.get('salary').touched" class="text-danger">
+          Salary is required and must be a positive number
+        </div>
+      </div>
+   
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" class="form-control" formControlName="description" placeholder="Enter job description"></textarea>
+        <div *ngIf="jobPostForm.get('description').invalid && jobPostForm.get('description').touched" class="text-danger">
+          Description is required
+        </div>
+      </div>
+   
+      <div class="form-group button-group">
+        <button type="submit" class="btn btn-primary" >Submit</button>
+      </div>
+    </form>
+   

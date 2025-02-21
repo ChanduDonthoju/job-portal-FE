@@ -1,0 +1,127 @@
+<nav class="navbar">
+    <div class="navbar-container">
+        <!-- Logo and Brand -->
+        <div class="navbar-logo">
+            <img src="../assets/job-icon.png" alt="Job Icon">
+            <span>JobConnect</span>
+        </div>
+  
+     <!-- Navigation Links -->
+     <ul class="navbar-links">
+      <li>
+        <a (click)="showHome()"><i class="bi bi-house-fill"></i> Home</a>
+      </li>
+   
+      <li class="notifications-container">
+        <a (click)="toggleNotifications()"><i class="bi bi-bell-fill"></i> Notifications</a>
+        <div class="dropdown-menu" *ngIf="notificationsDropdownOpen">
+          <div *ngFor="let notification of notifications; let i = index">
+            <div class="notification-item">
+              <p><strong>{{ notification.activityType }}</strong><br> on {{ notification.activityDate | date: 'dd-MMM-yyyy' }}</p>
+              <button (click)="removeNotification(i)" class="remove-btn"><i class="bi bi-x"></i></button>
+            </div>
+          </div>
+          <div *ngIf="notifications.length > 0">
+            <button (click)="clearAllNotifications()" class="clear-all-btn">Clear All</button>
+          </div>
+          <div *ngIf="notifications.length === 0">
+            <p>No notifications</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <a href="#"><i class="bi bi-file-earmark-text-fill"></i> Applications</a>
+      </li>
+    </ul>
+  
+        <!-- Profile Button -->
+        <div class="profile-container">
+          <button class="profile-btn" (click)="toggleDropdown()">
+              <i class="bi bi-person-circle"></i> Profile
+          </button>
+          <div class="dropdown-menu" *ngIf="profiledropdownOpen">
+              <a href="#" class="dropdown-item"><i class="bi bi-person-fill"></i> Update Profile</a>
+              <a href="#" class="dropdown-item"><i class="bi bi-key-fill"></i> Change Password</a>
+              <a href="#" class="dropdown-item logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
+          </div>
+        </div>
+    </div>
+  </nav>
+
+<br><br><br><br>
+
+
+  <div class="button-container">
+    <button class="btn btn-success" (click)="add()">Add</button>
+    <button class="btn btn-primary" (click)="getAllJobPosts()">Show</button>
+    <div class="container mt-5">
+  <div class="row">
+        <div *ngFor="let jobCard of jobposts" class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title"><strong>JobPost Id:</strong> {{ jobCard.jobPostId }}</h5>
+              <p class="card-text"><strong>Title:</strong> {{ jobCard.title }}</p>
+              <p class="card-text"><strong>Description:</strong> {{ jobCard.description }}</p>
+              <p class="card-text"><strong>Location:</strong> {{ jobCard.location }}</p>
+              <p class="card-text"><strong>Salary:</strong> {{ jobCard.salary }}</p>
+              <p class="card-text"><strong>Posted Date:</strong> {{ jobCard.postedDate }}</p>
+              <div class="button-group">
+                <button class="btn btn-warning mr-2" (click)="update(jobCard.jobPostId)">Update</button>
+                <button class="btn btn-danger" (click)="deleteJobPost(jobCard.jobPostId)">Delete</button>
+              </div>
+             
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="deleteMessage" class="alert alert-danger mt-3">
+        {{ deleteMessage }}
+      </div>
+    </div>
+  </div>
+
+
+
+<div class="container mt-5" *ngIf="showboolean">
+    <h2 class="form-heading">Job Post Form</h2>
+    <form [formGroup]="jobPostForm">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" class="form-control" formControlName="title" placeholder="Enter job title" />
+        <div *ngIf="jobPostForm.get('title').invalid && jobPostForm.get('title').touched" class="text-danger">
+          Title is required
+        </div>
+      </div>
+     
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" id="location" class="form-control" formControlName="location" placeholder="Enter location" />
+        <div *ngIf="jobPostForm.get('location').invalid && jobPostForm.get('location').touched" class="text-danger">
+          Location is required
+        </div>
+      </div>
+   
+      <div class="form-group">
+        <label for="salary">Salary</label>
+        <input type="number" id="salary" class="form-control" formControlName="salary" placeholder="Enter salary" />
+        <div *ngIf="jobPostForm.get('salary').invalid && jobPostForm.get('salary').touched" class="text-danger">
+          Salary is required and must be a positive number
+        </div>
+      </div>
+   
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" class="form-control" formControlName="description" placeholder="Enter job description"></textarea>
+        <div *ngIf="jobPostForm.get('description').invalid && jobPostForm.get('description').touched" class="text-danger">
+          Description is required
+        </div>
+      </div>
+   
+      <div class="form-group button-group">
+        <button type="submit" (click)="onSubmit()" class="btn btn-primary" >Submit</button>
+      </div>
+    </form>
+
+    <div *ngIf=" message" class="alert alert-danger mt-3">
+      {{  message }}
+    </div>
