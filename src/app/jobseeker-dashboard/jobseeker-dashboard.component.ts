@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JobseekerServiceService } from '../jobseeker-service.service';
 import { formatDate } from '@angular/common';
@@ -9,7 +9,7 @@ import { Application } from '../Application';
 @Component({
   selector: 'app-jobseeker-dashboard',
   templateUrl: './jobseeker-dashboard.component.html',
-  styleUrls: ['./jobseeker-dashboard.component.css']
+  styleUrls: ['./jobseeker-dashboard.component.css'],
 })
 export class JobseekerDashboardComponent implements OnInit {
   constructor(private r: Router, private js: JobseekerServiceService) {}
@@ -30,14 +30,14 @@ export class JobseekerDashboardComponent implements OnInit {
   toggleJobPosts() {
     this.showJobPosts = true;
     this.showFeaturedCompanies = false;
-    this.showApplications=false;
+    this.showApplications = false;
   }
 
   showFeaturedCompanies: boolean = true;
   showHome() {
     this.showJobPosts = false;
     this.showFeaturedCompanies = true;
-    this.showApplications=false;
+    this.showApplications = false;
   }
 
   jobpost(): void {
@@ -73,7 +73,11 @@ export class JobseekerDashboardComponent implements OnInit {
         case 'location':
           return job.location.toLowerCase().startsWith(searchTermLower);
         case 'date':
-          const formattedDate = formatDate(job.postedDate, 'dd-MMM-yyyy', 'en-US');
+          const formattedDate = formatDate(
+            job.postedDate,
+            'dd-MMM-yyyy',
+            'en-US'
+          );
           return formattedDate.toLowerCase().startsWith(searchTermLower);
         default:
           return false;
@@ -88,7 +92,7 @@ export class JobseekerDashboardComponent implements OnInit {
       activityDate: new Date(),
       jobSeekerId: 101,
       jobPostId: 401,
-      employerId: 501
+      employerId: 501,
     },
     {
       activityId: 2,
@@ -96,7 +100,7 @@ export class JobseekerDashboardComponent implements OnInit {
       activityDate: new Date(),
       jobSeekerId: 102,
       jobPostId: 402,
-      employerId: 502
+      employerId: 502,
     },
     {
       activityId: 3,
@@ -104,10 +108,25 @@ export class JobseekerDashboardComponent implements OnInit {
       activityDate: new Date(),
       jobSeekerId: 103,
       jobPostId: 403,
-      employerId: 503
-    }
+      employerId: 503,
+    },
+    {
+      activityId: 4,
+      activityType: 'Interview Scheduled',
+      activityDate: new Date(),
+      jobSeekerId: 103,
+      jobPostId: 403,
+      employerId: 503,
+    },
+    {
+      activityId: 5,
+      activityType: 'Interview Scheduled',
+      activityDate: new Date(),
+      jobSeekerId: 103,
+      jobPostId: 403,
+      employerId: 503,
+    },
   ];
-
 
   notificationsDropdownOpen = false;
 
@@ -123,7 +142,6 @@ export class JobseekerDashboardComponent implements OnInit {
     this.notifications = [];
   }
 
-
   applications: Application[] = [
     {
       applicationId: 1,
@@ -132,7 +150,7 @@ export class JobseekerDashboardComponent implements OnInit {
       location: 'Pune',
       salary: 75000,
       jobseekerName: 'Alice Smith',
-      jobseekerEmail: 'alice.smith@example.com'
+      jobseekerEmail: 'alice.smith@example.com',
     },
     {
       applicationId: 2,
@@ -141,7 +159,7 @@ export class JobseekerDashboardComponent implements OnInit {
       location: 'Mumbai',
       salary: 85000,
       jobseekerName: 'John Doe',
-      jobseekerEmail: 'john.doe@example.com'
+      jobseekerEmail: 'john.doe@example.com',
     },
     {
       applicationId: 3,
@@ -150,10 +168,18 @@ export class JobseekerDashboardComponent implements OnInit {
       location: 'Bangalore',
       salary: 90000,
       jobseekerName: 'Emma Johnson',
-      jobseekerEmail: 'emma.johnson@example.com'
-    }
+      jobseekerEmail: 'emma.johnson@example.com',
+    },
+    {
+      applicationId: 4,
+      jobPostTitle: 'Full Stack Developer',
+      postedDate: new Date('2025-03-10T14:30:00.000Z'),
+      location: 'Bangalore',
+      salary: 90000,
+      jobseekerName: 'Emma Johnson',
+      jobseekerEmail: 'emma.johnson@example.com',
+    },
   ];
-
 
   showApplications: boolean = false;
 
@@ -163,7 +189,14 @@ export class JobseekerDashboardComponent implements OnInit {
     this.showFeaturedCompanies = false;
   }
 
-
-
-
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const notificationsContainer = document.querySelector(
+      '.notifications-container'
+    );
+    if (notificationsContainer && !notificationsContainer.contains(target)) {
+      this.notificationsDropdownOpen = false;
+    }
+  }
 }

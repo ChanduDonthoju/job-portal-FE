@@ -1,63 +1,64 @@
 <div class="login-container">
-    <div class="login-card">
-        <h2 class="text-center">Login</h2>
-        <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-            <!-- Email Field -->
-            <div class="form-group position-relative">
-              <label for="email">
-                  <i class="bi bi-envelope"></i> Email
-              </label>
-              <div class="input-icon-container">
-                  <input
-                      type="email"
-                      id="email"
-                      [(ngModel)]="userlogin.email"
-                      name="userlogin.email"
-                      required
-                      email
-                      class="form-control"
-                      placeholder="Enter your email"
-                      #email="ngModel"
-                  />
-              </div>
-              <div *ngIf="email.invalid && email.touched" class="error-message">
-                  Please enter a valid email.
-              </div>
-            </div>
-         
-            <!-- Password Field with Eye Toggle -->
-            <div class="form-group position-relative">
-                <label for="password">Password</label>
-                <input
-                    type="password"
-                    id="password"
-                    [(ngModel)]="userlogin.password"
-                    name="userlogin.password"
-                    required
-                    minlength="6"
-                    class="form-control"
-                    placeholder="Enter your password"
-                    #password="ngModel"
-                />
-                <div *ngIf="password.invalid && password.touched" class="error-message">
-                    Password is required and must be at least 6 characters long.
-                </div>
-            </div>
- 
-            <!-- Error Message -->
-            <div *ngIf="errMsg" class="error-message text-center">
-                {{ errMsg }}
-            </div>
- 
-            <!-- Login Button -->
-            <button type="submit" class="btn btn-primary w-100 small-button">Login</button>
-        </form>
- 
-        <!-- Sign-up Prompt -->
-        <div class="signup-prompt text-center">
-            <p class="mb-2">Are you a new user?</p>
-            <button (click)="Register()" class="btn btn-outline-primary">Register</button>
+  <div class="login-card">
+    <h1 class="text-center">Login</h1>
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <!-- Email Field -->
+      <div class="form-group position-relative">
+        <label for="email"><i class="bi bi-envelope"></i> Email</label>
+        <div class="input-icon-container">
+          <input
+            type="email"
+            id="email"
+            [(ngModel)]="userlogin.email"
+            name="userlogin.email"
+            required
+            email
+            class="form-control"
+            placeholder="yourname@example.com"
+            #email="ngModel"
+          />
         </div>
+        <div *ngIf="email.invalid && email.touched" class="error-message">
+          Please enter a valid email.
+        </div>
+      </div>
+
+      <!-- Password Field with Eye Toggle -->
+      <div class="form-group position-relative">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          [(ngModel)]="userlogin.password"
+          name="userlogin.password"
+          required
+          minlength="6"
+          class="form-control"
+          placeholder="Enter your password"
+          #password="ngModel"
+        />
+        <div *ngIf="password.invalid && password.touched" class="error-message">
+          Password is required and must be at least 6 characters long.
+        </div>
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="errMsg" class="error-message text-center">
+        {{ errMsg }}
+      </div>
+
+      <!-- Login Button -->
+      <button type="submit" class="btn btn-primary w-100 small-button">
+        Login
+      </button>
+    </form>
+
+    <!-- Sign-up Prompt -->
+    <div class="signup-prompt text-center">
+      <p class="mb-2">Are you a new user?</p>
+      <button (click)="Register()" class="btn btn-outline-primary">
+        Register
+      </button>
     </div>
   </div>
- 
+</div>

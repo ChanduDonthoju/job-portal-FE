@@ -1,7 +1,6 @@
-export class User{
-    public id:number;
-    public email:string;
-    public password:string;
-    public role:string;
+export class User {
+  public id: number;
+  public email: string;
+  public password: string;
+  public role: string;
 }
- 

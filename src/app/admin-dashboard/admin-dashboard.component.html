@@ -1,1 +1,241 @@
-<p>admin-dashboard works!</p>
+<nav class="navbar">
+  <div class="navbar-container">
+    <!-- Logo and Brand -->
+    <div class="navbar-logo">
+      <img src="../assets/job-icon.png" alt="Job Icon" />
+      <span>JobConnect</span>
+    </div>
+
+    <!-- Navigation Links -->
+    <ul class="navbar-links">
+      <li>
+        <a (click)="showHome()"><i class="bi bi-house-fill"></i> Home</a>
+      </li>
+      <li>
+        <a (click)="toggleJobSeekers()"
+          ><i class="bi bi-briefcase-fill"></i> Jobseekers</a
+        >
+      </li>
+      <li>
+        <a (click)="toggleEmployers()"
+          ><i class="bi bi-briefcase-fill"></i> Employers</a
+        >
+      </li>
+      <li>
+        <a (click)="toggleJobPosts()"
+          ><i class="bi bi-briefcase-fill"></i> Jobs</a
+        >
+      </li>
+      <li>
+        <a (click)="toggleApplications()"
+          ><i class="bi bi-file-earmark-text-fill"></i> Applications</a
+        >
+      </li>
+      <li class="notifications-container">
+        <a (click)="toggleNotifications()"><i class="bi bi-bell-fill"></i></a>
+        <div class="notify-dropdown-menu" *ngIf="notificationsDropdownOpen">
+          <div *ngFor="let notification of notifications; let i = index">
+            <div class="notification-item">
+              <p>
+                <strong>{{ notification.activityType }}</strong
+                ><br />
+                on {{ notification.activityDate | date : "dd-MMM-yyyy" }}
+              </p>
+              <button (click)="removeNotification(i)" class="remove-btn">
+                <i class="bi bi-x"></i>
+              </button>
+            </div>
+          </div>
+          <div *ngIf="notifications.length > 0">
+            <button (click)="clearAllNotifications()" class="clear-all-btn">
+              Clear All
+            </button>
+          </div>
+          <div *ngIf="notifications.length === 0">
+            <p>No notifications</p>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <!-- Profile Button -->
+    <div class="profile-container">
+      <button class="profile-btn" (click)="toggleDropdown()">
+        <i class="bi bi-person-circle"></i> Profile
+      </button>
+      <div class="dropdown-menu" *ngIf="profiledropdownOpen">
+        <a href="#" class="dropdown-item"
+          ><i class="bi bi-person-fill"></i> Update Profile</a
+        >
+        <a href="#" class="dropdown-item"
+          ><i class="bi bi-key-fill"></i> Change Password</a
+        >
+        <a href="#" class="dropdown-item logout"
+          ><i class="bi bi-box-arrow-right"></i> Logout</a
+        >
+      </div>
+    </div>
+  </div>
+</nav>
+<br /><br /><br /><br /><br />
+
+<!-- Users Section -->
+<div id="user-container" *ngIf="usersdiv">
+  <h2>Users List</h2>
+  <hr class="divider" />
+  <div class="cards-container">
+    <div class="card" *ngFor="let u of user">
+      <h3>{{ u.email }}</h3>
+      <p>
+        Password:
+        <span class="masked-password">{{ getMaskedPassword(u.password) }}</span>
+      </p>
+      <p>
+        Role: <span class="role">{{ u.role }}</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Job Seekers Section -->
+<div id="jobseekers-container" *ngIf="showJobSeekers">
+  <h2>Job Seekers List</h2>
+  <hr class="divider" />
+  <div class="cards-container">
+    <div class="card" *ngFor="let j of jobSeekers">
+      <h3>{{ j.name }}</h3>
+      <p>
+        Email: <span class="info">{{ j.email }}</span>
+      </p>
+      <p>
+        Phone: <span class="info">{{ j.phone }}</span>
+      </p>
+      <p>
+        City: <span class="info">{{ j.city }}</span>
+      </p>
+      <p>
+        Degree: <span class="info">{{ j.degree }}</span>
+      </p>
+      <p>
+        Experience: <span class="info">{{ j.experience }} years</span>
+      </p>
+
+      <div class="button-row">
+        <button class="btn update">Update</button>
+        <button class="btn deactivate">Deactivate</button>
+      </div>
+
+      <div class="button-row">
+        <button class="btn activity">Activity</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Employers Section -->
+<div id="jobseekers-container" *ngIf="showEmployers">
+  <h2>Job Seekers List</h2>
+  <hr class="divider" />
+  <div class="cards-container">
+    <div class="card" *ngFor="let e of employers">
+      <h3>{{ e.employerName }}</h3>
+
+      <p>
+        CompanyName: <span class="info">{{ e.companyName }}</span>
+      </p>
+      <p>
+        Email: <span class="info">{{ e.email }}</span>
+      </p>
+      <p>
+        Phone: <span class="info">{{ e.phone }}</span>
+      </p>
+      <p>
+        City: <span class="info">{{ e.city }}</span>
+      </p>
+
+      <div class="button-row">
+        <button class="btn update">Update</button>
+        <button class="btn deactivate">Deactivate</button>
+      </div>
+
+      <div class="button-row">
+        <button class="btn activity">Activity</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Job Posts Section (Initially Hidden) -->
+<div class="jobpost-container" *ngIf="showJobPosts">
+  <h2 class="title">Job Listings</h2>
+
+  <div class="filter-search-bar">
+    <div class="dropdown-container">
+      <button class="filter-btn" (click)="filterToggleDropdown()">
+        Filter <i class="bi bi-filter"></i>
+      </button>
+
+      <div class="dropdown-menu" *ngIf="dropdownOpen">
+        <button (click)="setFilter('title')">Title</button>
+        <button (click)="setFilter('salary')">Salary</button>
+        <button (click)="setFilter('location')">Location</button>
+        <button (click)="setFilter('date')">Date</button>
+      </div>
+    </div>
+
+    <input
+      type="text"
+      class="search-bar"
+      [(ngModel)]="searchTerm"
+      (input)="filterJobs()"
+      placeholder="Search by {{ selectedFilter }}"
+    />
+  </div>
+
+  <div class="jobpost-grid">
+    <div class="jobpost-card" *ngFor="let job of filteredJobPosts">
+      <div class="card-header">
+        <h3>{{ job.title }}</h3>
+      </div>
+      <div class="card-body">
+        <p><strong>Description:</strong> {{ job.description }}</p>
+        <p><strong>Location:</strong> {{ job.location }}</p>
+        <p><strong>Salary:</strong> {{ job.salary | currency : "INR" }}</p>
+        <p>
+          <strong>Posted:</strong> {{ job.postedDate | date : "dd-MMM-yyyy" }}
+        </p>
+      </div>
+      <div class="card-footer">
+        <button class="apply-btn">Apply Now</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Applications Section (Initially Hidden) -->
+<div class="applications-container" *ngIf="showApplications">
+  <h2 class="title">Applications</h2>
+
+  <div class="application-grid">
+    <div class="application-card" *ngFor="let application of applications">
+      <div class="card-header">
+        <h3>{{ application.jobPostTitle }}</h3>
+      </div>
+      <div class="card-body">
+        <p><strong>Job Seeker:</strong> {{ application.jobseekerName }}</p>
+        <p><strong>Email:</strong> {{ application.jobseekerEmail }}</p>
+        <p><strong>Location:</strong> {{ application.location }}</p>
+        <p>
+          <strong>Salary:</strong> {{ application.salary | currency : "INR" }}
+        </p>
+        <p>
+          <strong>Posted:</strong>
+          {{ application.postedDate | date : "dd-MMM-yyyy" }}
+        </p>
+        <div class="button-group">
+          <button class="resume-btn">View Resume</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

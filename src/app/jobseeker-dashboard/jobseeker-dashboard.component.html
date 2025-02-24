@@ -1,52 +1,72 @@
 <nav class="navbar">
   <div class="navbar-container">
-      <!-- Logo and Brand -->
-      <div class="navbar-logo">
-          <img src="../assets/job-icon.png" alt="Job Icon">
-          <span>JobConnect</span>
-      </div>
+    <!-- Logo and Brand -->
+    <div class="navbar-logo">
+      <img src="../assets/job-icon.png" alt="Job Icon" />
+      <span>JobConnect</span>
+    </div>
 
-   <!-- Navigation Links -->
-   <ul class="navbar-links">
-    <li>
-      <a (click)="showHome()"><i class="bi bi-house-fill"></i> Home</a>
-    </li>
-    <li>
-      <a (click)="toggleJobPosts()"><i class="bi bi-briefcase-fill"></i> Job Posts</a>
-    </li>
-    <li class="notifications-container">
-      <a (click)="toggleNotifications()"><i class="bi bi-bell-fill"></i> Notifications</a>
-      <div class="dropdown-menu" *ngIf="notificationsDropdownOpen">
-        <div *ngFor="let notification of notifications; let i = index">
-          <div class="notification-item">
-            <p><strong>{{ notification.activityType }}</strong><br> on {{ notification.activityDate | date: 'dd-MMM-yyyy' }}</p>
-            <button (click)="removeNotification(i)" class="remove-btn"><i class="bi bi-x"></i></button>
+    <!-- Navigation Links -->
+    <ul class="navbar-links">
+      <li>
+        <a (click)="showHome()"><i class="bi bi-house-fill"></i> Home</a>
+      </li>
+      <li>
+        <a (click)="toggleJobPosts()"
+          ><i class="bi bi-briefcase-fill"></i> Job Posts</a
+        >
+      </li>
+      <li class="notifications-container">
+        <a (click)="toggleNotifications()"
+          ><i class="bi bi-bell-fill"></i> Notifications</a
+        >
+        <div class="notify-dropdown-menu" *ngIf="notificationsDropdownOpen">
+          <div *ngFor="let notification of notifications; let i = index">
+            <div class="notification-item">
+              <p>
+                <strong>{{ notification.activityType }}</strong
+                ><br />
+                on {{ notification.activityDate | date : "dd-MMM-yyyy" }}
+              </p>
+              <button (click)="removeNotification(i)" class="remove-btn">
+                <i class="bi bi-x"></i>
+              </button>
+            </div>
+          </div>
+          <div *ngIf="notifications.length > 0">
+            <button (click)="clearAllNotifications()" class="clear-all-btn">
+              Clear All
+            </button>
+          </div>
+          <div *ngIf="notifications.length === 0">
+            <p>No notifications</p>
           </div>
         </div>
-        <div *ngIf="notifications.length > 0">
-          <button (click)="clearAllNotifications()" class="clear-all-btn">Clear All</button>
-        </div>
-        <div *ngIf="notifications.length === 0">
-          <p>No notifications</p>
-        </div>
-      </div>
-    </li>
-    <li>
-      <a (click)="toggleApplications()"><i class="bi bi-file-earmark-text-fill"></i> Applications</a>
-    </li>
-  </ul>
+      </li>
+      <li>
+        <a (click)="toggleApplications()"
+          ><i class="bi bi-file-earmark-text-fill"></i> Applications</a
+        >
+      </li>
+    </ul>
 
-      <!-- Profile Button -->
-      <div class="profile-container">
-        <button class="profile-btn" (click)="toggleDropdown()">
-            <i class="bi bi-person-circle"></i> Profile
-        </button>
-        <div class="dropdown-menu" *ngIf="profiledropdownOpen">
-            <a href="#" class="dropdown-item"><i class="bi bi-person-fill"></i> Update Profile</a>
-            <a href="#" class="dropdown-item"><i class="bi bi-key-fill"></i> Change Password</a>
-            <a href="#" class="dropdown-item logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
-        </div>
+    <!-- Profile Button -->
+    <div class="profile-container">
+      <button class="profile-btn" (click)="toggleDropdown()">
+        <i class="bi bi-person-circle"></i> Profile
+      </button>
+      <div class="dropdown-menu" *ngIf="profiledropdownOpen">
+        <a href="#" class="dropdown-item"
+          ><i class="bi bi-person-fill"></i> Update Profile</a
+        >
+        <a href="#" class="dropdown-item"
+          ><i class="bi bi-key-fill"></i> Change Password</a
+        >
+        <a href="#" class="dropdown-item logout"
+          ><i class="bi bi-box-arrow-right"></i> Logout</a
+        >
       </div>
+    </div>
   </div>
 </nav>
 
@@ -54,91 +74,90 @@
   <h1>Featured Companies Actively Hiring</h1>
 
   <div class="company-slider">
-      <div class="company-grid">
-          <!-- Company 1 -->
-          <div class="company-card">
-              <img src="../../assets/capgemini.png" alt="Capgemini">
-              <h2>Capgemini</h2>
-              <h3>4.0 ★ 500+ reviews</h3>
-              <p>We are transforming tech through innovation.</p>
-              <button class="view-jobs-btn">View Jobs</button>
-          </div>
-
-          <!-- Company 2 -->
-          <div class="company-card">
-              <img src="../../assets/tcs.png" alt="TCS">
-              <h2>Tata Consultancy Services</h2>
-              <h3>4.2 ★ 1,000+ reviews</h3>
-              <p>Leading IT services with global impact.</p>
-              <button class="view-jobs-btn">View Jobs</button>
-          </div>
-
-          <!-- Company 3 -->
-          <div class="company-card">
-              <img src="../../assets/infosys.png" alt="Infosys">
-              <h2>Infosys</h2>
-              <h3>4.1 ★ 800+ reviews</h3>
-              <p>Innovative solutions for the digital era.</p>
-              <button class="view-jobs-btn">View Jobs</button>
-          </div>
-
-          <!-- Company 4 -->
-          <div class="company-card">
-              <img src="../../assets/wipro.png" alt="Wipro">
-              <h2>Wipro</h2>
-              <h3>3.9 ★ 600+ reviews</h3>
-              <p>Delivering digital transformation worldwide.</p>
-              <button class="view-jobs-btn">View Jobs</button>
-          </div>
-
-          <!-- Company 5 -->
-          <div class="company-card">
-              <img src="../../assets/hcl.png" alt="HCL">
-              <h2>HCL Technologies</h2>
-              <h3>4.0 ★ 700+ reviews</h3>
-              <p>Driving innovation through technology.</p>
-              <button class="view-jobs-btn">View Jobs</button>
-          </div>
-
-          <!-- Company 6 -->
-          <div class="company-card">
-              <img src="../../assets/dell.png" alt="Dell">
-              <h2>Mindtree</h2>
-              <h3>4.1 ★ 500+ reviews</h3>
-              <p>Building a smarter digital future.</p>
-              <button class="view-jobs-btn">View Jobs</button>
-          </div>
-
-          <!-- Company 7 -->
-          <div class="company-card">
-              <img src="../../assets/ibm.png" alt="IBM">
-              <h2>Tech Mahindra</h2>
-              <h3>3.8 ★ 400+ reviews</h3>
-              <p>Empowering enterprises through tech solutions.</p>
-              <button class="view-jobs-btn">View Jobs</button>
-          </div>
-
-          <!-- Company 8 -->
-          <div class="company-card">
-              <img src="../../assets/accenture.png" alt="Accenture">
-              <h2>Accenture</h2>
-              <h3>4.3 ★ 1,200+ reviews</h3>
-              <p>Shaping the future with technology and strategy.</p>
-              <button class="view-jobs-btn">View Jobs</button>
-          </div>
-
-          <!-- Company 9 -->
-          <div class="company-card">
-              <img src="../../assets/ception.png" alt="Ception">
-              <h2>Cognizant</h2>
-              <h3>4.0 ★ 900+ reviews</h3>
-              <p>Transforming businesses with digital solutions.</p>
-              <button class="view-jobs-btn">View Jobs</button>
-          </div>
+    <div class="company-grid">
+      <!-- Company 1 -->
+      <div class="company-card">
+        <img src="../../assets/mphasis.jpg" alt="Mphasis" />
+        <h2>Mphasis</h2>
+        <h3>4.5 ★ 500+ reviews</h3>
+        <p>We are transforming tech through innovation.</p>
+        <button class="view-jobs-btn">View Jobs</button>
       </div>
+
+      <!-- Company 2 -->
+      <div class="company-card">
+        <img src="../../assets/tcs.png" alt="TCS" />
+        <h2>Tata Consultancy Services</h2>
+        <h3>4.2 ★ 1,000+ reviews</h3>
+        <p>Leading IT services with global impact.</p>
+        <button class="view-jobs-btn">View Jobs</button>
+      </div>
+
+      <!-- Company 3 -->
+      <div class="company-card">
+        <img src="../../assets/infosys.png" alt="Infosys" />
+        <h2>Infosys</h2>
+        <h3>4.1 ★ 800+ reviews</h3>
+        <p>Innovative solutions for the digital era.</p>
+        <button class="view-jobs-btn">View Jobs</button>
+      </div>
+
+      <!-- Company 4 -->
+      <div class="company-card">
+        <img src="../../assets/wipro.png" alt="Wipro" />
+        <h2>Wipro</h2>
+        <h3>3.9 ★ 600+ reviews</h3>
+        <p>Delivering digital transformation worldwide.</p>
+        <button class="view-jobs-btn">View Jobs</button>
+      </div>
+
+      <!-- Company 5 -->
+      <div class="company-card">
+        <img src="../../assets/hcl.png" alt="HCL" />
+        <h2>HCL Technologies</h2>
+        <h3>4.0 ★ 700+ reviews</h3>
+        <p>Driving innovation through technology.</p>
+        <button class="view-jobs-btn">View Jobs</button>
+      </div>
+
+      <!-- Company 6 -->
+      <div class="company-card">
+        <img src="../../assets/dell.png" alt="Dell" />
+        <h2>Mindtree</h2>
+        <h3>4.1 ★ 500+ reviews</h3>
+        <p>Building a smarter digital future.</p>
+        <button class="view-jobs-btn">View Jobs</button>
+      </div>
+
+      <!-- Company 7 -->
+      <div class="company-card">
+        <img src="../../assets/ibm.png" alt="IBM" />
+        <h2>Tech Mahindra</h2>
+        <h3>3.8 ★ 400+ reviews</h3>
+        <p>Empowering enterprises through tech solutions.</p>
+        <button class="view-jobs-btn">View Jobs</button>
+      </div>
+
+      <!-- Company 8 -->
+      <div class="company-card">
+        <img src="../../assets/accenture.png" alt="Accenture" />
+        <h2>Accenture</h2>
+        <h3>4.3 ★ 1,200+ reviews</h3>
+        <p>Shaping the future with technology and strategy.</p>
+        <button class="view-jobs-btn">View Jobs</button>
+      </div>
+
+      <!-- Company 9 -->
+      <div class="company-card">
+        <img src="../../assets/ception.png" alt="Ception" />
+        <h2>Cognizant</h2>
+        <h3>4.0 ★ 900+ reviews</h3>
+        <p>Transforming businesses with digital solutions.</p>
+        <button class="view-jobs-btn">View Jobs</button>
+      </div>
+    </div>
   </div>
 </div>
-
 
 <!-- Job Posts Section (Initially Hidden) -->
 <div class="jobpost-container" *ngIf="showJobPosts">
@@ -148,8 +167,8 @@
     <div class="dropdown-container">
       <button class="filter-btn" (click)="filterToggleDropdown()">
         Filter <i class="bi bi-filter"></i>
-      </button>      
-      
+      </button>
+
       <div class="dropdown-menu" *ngIf="dropdownOpen">
         <button (click)="setFilter('title')">Title</button>
         <button (click)="setFilter('salary')">Salary</button>
@@ -158,7 +177,13 @@
       </div>
     </div>
 
-    <input type="text" class="search-bar" [(ngModel)]="searchTerm" (input)="filterJobs()" placeholder="Search by {{ selectedFilter }}" />
+    <input
+      type="text"
+      class="search-bar"
+      [(ngModel)]="searchTerm"
+      (input)="filterJobs()"
+      placeholder="Search by {{ selectedFilter }}"
+    />
   </div>
 
   <div class="jobpost-grid">
@@ -169,8 +194,10 @@
       <div class="card-body">
         <p><strong>Description:</strong> {{ job.description }}</p>
         <p><strong>Location:</strong> {{ job.location }}</p>
-        <p><strong>Salary:</strong> {{ job.salary | currency: 'INR' }}</p>
-        <p><strong>Posted:</strong> {{ job.postedDate | date: 'dd-MMM-yyyy' }}</p>
+        <p><strong>Salary:</strong> {{ job.salary | currency : "INR" }}</p>
+        <p>
+          <strong>Posted:</strong> {{ job.postedDate | date : "dd-MMM-yyyy" }}
+        </p>
       </div>
       <div class="card-footer">
         <button class="apply-btn">Apply Now</button>
@@ -178,7 +205,6 @@
     </div>
   </div>
 </div>
-
 
 <!-- Applications Section (Initially Hidden) -->
 <div class="applications-container" *ngIf="showApplications">
@@ -193,15 +219,18 @@
         <p><strong>Job Seeker:</strong> {{ application.jobseekerName }}</p>
         <p><strong>Email:</strong> {{ application.jobseekerEmail }}</p>
         <p><strong>Location:</strong> {{ application.location }}</p>
-        <p><strong>Salary:</strong> {{ application.salary | currency: 'INR' }}</p>
-        <p><strong>Posted:</strong> {{ application.postedDate | date: 'dd-MMM-yyyy' }}</p>
-        <div class="button-group">
+        <p>
+          <strong>Salary:</strong> {{ application.salary | currency : "INR" }}
+        </p>
+        <p>
+          <strong>Posted:</strong>
+          {{ application.postedDate | date : "dd-MMM-yyyy" }}
+        </p>
+        <!-- <div class="button-group">
           <button class="resume-btn">View Resume</button>
           <button class="shortlist-btn">Shortlist</button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
 </div>
-
-
